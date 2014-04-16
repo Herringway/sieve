@@ -1,9 +1,7 @@
 (use 'clojure.set)
 (defn multiples-to-n
 	[multiplier limit]
-	(->> (range (+ limit 1))
-		(take-nth multiplier)
-		(remove #(>= multiplier %)))
+	(range (* 2 multiplier) (+ limit 1) multiplier)
 ) ; multiples-to-n
 (defn get-multiple-lists
 	[limit]
