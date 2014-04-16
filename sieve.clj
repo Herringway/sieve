@@ -6,9 +6,9 @@
 (defn get-multiple-lists
 	[limit]
 	(map #(multiples-to-n % limit) (remove #(> 2 %) (range limit)))
-)
+) ; get-multiple-lists
 (defn sieve
 	[limit]
 	(sort (apply difference (set (range limit)) (get-multiple-lists limit)))
-)
+) ; sieve
 (println (sieve 1000))
