@@ -7,13 +7,13 @@
 ) ; multiples-to-n
 (defn get-multiple-lists
 	[limit]
-	(->> (remove #(> 2 %) (range (/ limit 2)))
+	(->> (range 2 (/ limit 2))
 		(map #(multiples-to-n % limit)))
 ) ; get-multiple-lists
 (defn sieve
 	[limit]
 	(as-> (get-multiple-lists limit) $
-		(apply difference (set (remove #(> 2 %) (range limit))) $)
+		(apply difference (set (range 2 limit)) $)
 		(sort $))
 ) ; sieve
-(println (sieve 10000))
+(println (sieve 100))
