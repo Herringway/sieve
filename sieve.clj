@@ -5,7 +5,7 @@
 ) ; multiples-to-n
 (defn get-multiple-lists
 	[limit]
-	(map #(multiples-to-n % limit) (remove #(> 2 %) (range limit)))
+	(map #(multiples-to-n % limit) (remove #(> 2 %) (range (/ limit 2))))
 ) ; get-multiple-lists
 (defn sieve
 	[limit]
