@@ -1,4 +1,6 @@
 (use 'clojure.set)
+(use 'clojure.test)
+
 (defn multiples-to-n
   "Generates a list of multiples for a given number up to the specified limit"
   [multiplier limit]
@@ -17,4 +19,24 @@
     (apply difference (set (range 2 limit)) $) ;remove all generated multiples from the list of numbers
     (sort $))                                  ;not really necessary, but sorted output is nice.
 ) ; sieve
+
+(deftest sieve-negative-input ;check that sieve can handle negative numbers
+    (is (= () (sieve -1)))
+    (is (= () (sieve -10)))
+)
+(deftest sieve-zero-input ;sieve should also handle zero appropriately
+    (is (= () (sieve 0)))
+)
+(deftest sieve-low-positive-input ;trivial cases
+    (is (= () (sieve 1)))
+    (is (= () (sieve 2)))
+    (is (= '(2) (sieve 3)))
+    (is (= '(2 3) (sieve 4)))
+)
+(deftest sieve-positive-input ;non-trivial cases
+    (is (= '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97) (sieve 100)))
+    (is (= '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97) (sieve 101)))
+    (is (= '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101) (sieve 102)))
+)
+    
 (println (sieve 100))
