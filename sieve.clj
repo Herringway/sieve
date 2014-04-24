@@ -1,5 +1,10 @@
+(ns sieve.core
+  (:gen-class))
 (use 'clojure.set)
 (use 'clojure.test)
+
+; Threaded Sieve of Eratosthenes implementation
+; Created by Cameron "Rocco" Ross and Michael Colburn for COMP 3711 in the winter 2014 semester.
 
 (defn multiples-to-n
   "Generates a list of multiples for a given number up to the specified limit"
@@ -15,9 +20,10 @@
 (defn sieve
   "Threaded implementation of the sieve of eratosthenes. Generates a list of prime numbers up to the given limit"
   [limit]
+  (if (not (number? limit)) (sieve 0)          ;if limit isn't a number, assume zero.
   (as-> (get-multiple-lists limit) $           ;generate lists of all possible multiples for each number up to the limit
     (apply difference (set (range 2 limit)) $) ;remove all generated multiples from the list of numbers
-    (sort $))                                  ;not really necessary, but sorted output is nice.
+    (sort $)))                                 ;not really necessary, but sorted output is nice.
 ) ; sieve
 
 (deftest sieve-negative-input ;check that sieve can handle negative numbers
@@ -52,5 +58,3 @@
     (is (= '() (sieve '(1 2 3))))
     (is (= '() (sieve \a)))
 )
-
-(println (sieve 100))
