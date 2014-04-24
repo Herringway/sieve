@@ -38,5 +38,19 @@
     (is (= '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97) (sieve 101)))
     (is (= '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101) (sieve 102)))
 )
-    
+(deftest sieve-float-input ;floats should work just as well as integers
+    (is (= '() (sieve -1.2)))
+    (is (= '() (sieve 0.0)))
+    (is (= '() (sieve 1.9999999)))
+    (is (= '() (sieve 2.0)))
+    (is (= '(2) (sieve 2.000000001)))
+    (is (= '(2 3 5 7) (sieve 8.3)))
+)
+(deftest sieve-non-numeric-input ;none of these make sense in the context of numbers
+    (is (= '() (sieve :stuff)))
+    (is (= '() (sieve "gogo juice")))
+    (is (= '() (sieve '(1 2 3))))
+    (is (= '() (sieve \a)))
+)
+
 (println (sieve 100))
